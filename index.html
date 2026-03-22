@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shubhangi Shreya - Writer</title>
+<title>Shubhangi Shreya, Writer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Mono:wght@300;400&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -33,17 +33,7 @@ body{
   overflow-x:hidden;
 }
 
-/* ── CURSOR ── */
-body{cursor:none}
-#cursor{
-  position:fixed;width:10px;height:10px;
-  background:var(--amber);border-radius:50%;
-  pointer-events:none;z-index:9999;
-  transform:translate(-50%,-50%);
-  transition:transform 0.15s ease,width 0.3s,height 0.3s,background 0.3s;
-  mix-blend-mode:multiply;
-}
-#cursor.big{width:40px;height:40px;background:var(--amber2);opacity:0.5}
+
 
 /* ── NAV ── */
 nav{
@@ -67,6 +57,7 @@ nav.scrolled{
 .nav-links a{
   font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;
   color:var(--ink3);text-decoration:none;transition:color 0.2s;
+  cursor:pointer;
 }
 .nav-links a:hover{color:var(--amber)}
 
@@ -193,9 +184,8 @@ nav.scrolled{
 .filter-btn{
   font-family:var(--mono);font-size:0.68rem;letter-spacing:0.12em;
   text-transform:uppercase;padding:0.4rem 1rem;
-  cursor:none;
   border:1px solid var(--rule);background:none;
-  color:var(--ink3);cursor:none;transition:all 0.2s;
+  color:var(--ink3);cursor:pointer;transition:all 0.2s;
 }
 .filter-btn.active,.filter-btn:hover{
   background:var(--ink);color:var(--amber2);border-color:var(--ink);
@@ -316,7 +306,6 @@ footer em{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,0.5)
 </head>
 <body>
 
-<div id="cursor"></div>
 
 <!-- NAV -->
 <nav id="nav">
@@ -425,7 +414,7 @@ footer em{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,0.5)
       </div>
       <div class="sidebar-block">
         <div class="sidebar-heading">Education</div>
-        <div class="sidebar-text">B.F.Tech - NIFT Bangalore &nbsp;·&nbsp; AIR 14, NIFT 2016 &nbsp;·&nbsp; UNESCO Essay Competition - Honorary Mention &nbsp;·&nbsp; Operations Analytics, Wharton Online</div>
+        <div class="sidebar-text">B.F.Tech, NIFT Bangalore &nbsp;·&nbsp; AIR 14, NIFT 2016 &nbsp;·&nbsp; UNESCO Essay Competition, Honorary Mention &nbsp;·&nbsp; Operations Analytics, Wharton Online</div>
       </div>
     </div>
   </div>
@@ -478,7 +467,7 @@ footer em{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,0.5)
     <a href="https://www.adaface.com/blog/evaluating-application-tracking-systems/" target="_blank" class="writing-card" data-cat="hrtech">
       <div class="card-category">HR Tech &nbsp;·&nbsp; Recruiting Ops</div>
       <div class="card-title">How to Evaluate an Application Tracking System</div>
-      <div class="card-excerpt">Choosing an ATS is like evaluating a candidate; you need clear criteria before you start. A guide to building the right selection committee and assessing vendors.</div>
+      <div class="card-excerpt">Choosing an ATS is like evaluating a candidate, you need clear criteria before you start. A guide to building the right selection committee and assessing vendors.</div>
       <div class="card-footer">
         <span class="card-pub">adaface.com/blog &nbsp;·&nbsp; Feb 2023</span>
         <span class="card-arrow">→</span>
@@ -539,7 +528,7 @@ footer em{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,0.5)
       <div>
         <div class="exp-role">Marketing Writer &amp; Content Strategist</div>
         <ul class="exp-bullets">
-          <li><strong>Employee #1</strong> at an Entrepreneur First-backed B2B SaaS startup; defined brand voice from scratch.</li>
+          <li><strong>Employee #1</strong> at an Entrepreneur First-backed B2B SaaS startup, defined brand voice from scratch.</li>
           <li>Grew organic traffic <strong>+28% month-over-month</strong> and domain authority by 45% through long-form editorial publishing.</li>
           <li>Managed 2 SEO agencies, 2 websites, and 3 international interns; authored 10+ high-ranking blog articles.</li>
           <li>Wrote 8 product demo scripts that converted 3 enterprise clients; ghostwrote for 300+ individual businesses.</li>
@@ -619,15 +608,7 @@ footer em{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,0.5)
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const cursor = document.getElementById('cursor');
-document.addEventListener('mousemove', e => {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
-});
-document.querySelectorAll('a,button').forEach(el => {
-  el.addEventListener('mouseenter', () => cursor.classList.add('big'));
-  el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
-});
+
 
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);

@@ -91,24 +91,28 @@ nav.scrolled{
   font-family:var(--mono);font-size:0.72rem;
   color:var(--amber);letter-spacing:0.2em;
   text-transform:uppercase;margin-bottom:1.5rem;
-  opacity:0;animation:rise 0.9s 0.2s forwards;
+  opacity:1;
+  animation:rise 0.9s 0.2s both;
 }
 .hero-name{
   font-family:var(--serif);
   font-size:clamp(4.5rem,9vw,8.5rem);
   font-weight:400;line-height:0.92;
   letter-spacing:-0.03em;margin-bottom:1.5rem;
-  opacity:0;animation:rise 0.9s 0.4s forwards;
+  opacity:1;
+  animation:rise 0.9s 0.4s both;
 }
 .hero-name em{font-style:italic;color:var(--amber)}
 .hero-tagline{
   font-size:1rem;color:var(--ink2);max-width:480px;
   line-height:1.8;margin-bottom:2.5rem;
-  opacity:0;animation:rise 0.9s 0.6s forwards;
+  opacity:1;
+  animation:rise 0.9s 0.6s both;
 }
 .hero-bottom{
   display:flex;align-items:center;gap:2rem;flex-wrap:wrap;
-  opacity:0;animation:rise 0.9s 0.8s forwards;
+  opacity:1;
+  animation:rise 0.9s 0.8s both;
 }
 .btn-primary{
   display:inline-flex;align-items:center;gap:0.5rem;
@@ -189,6 +193,7 @@ nav.scrolled{
 .filter-btn{
   font-family:var(--mono);font-size:0.68rem;letter-spacing:0.12em;
   text-transform:uppercase;padding:0.4rem 1rem;
+  cursor:none;
   border:1px solid var(--rule);background:none;
   color:var(--ink3);cursor:none;transition:all 0.2s;
 }
@@ -198,11 +203,11 @@ nav.scrolled{
 .writing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--rule)}
 .writing-card{
   background:var(--paper);padding:2rem;
-  transition:background 0.25s;
   position:relative;overflow:hidden;
   display:flex;flex-direction:column;
-  opacity:0;transform:translateY(16px);
+  opacity:1;transform:translateY(0);
   transition:opacity 0.6s,transform 0.6s,background 0.25s;
+  text-decoration:none;color:inherit;
 }
 .writing-card.vis{opacity:1;transform:translateY(0)}
 .writing-card:hover{background:var(--amber-pale)}
@@ -244,7 +249,7 @@ nav.scrolled{
 .exp-item{
   display:grid;grid-template-columns:200px 1fr;gap:3rem;
   padding:2.5rem 0;border-bottom:1px solid var(--rule);
-  opacity:0;transform:translateY(14px);
+  opacity:1;transform:translateY(0);
   transition:opacity 0.7s,transform 0.7s;
 }
 .exp-item.vis{opacity:1;transform:translateY(0)}
@@ -289,8 +294,8 @@ footer{
 footer em{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,0.5)}
 
 /* ── ANIMATIONS ── */
-@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.8s,transform 0.8s}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:1;transform:translateY(0);transition:opacity 0.8s,transform 0.8s}
 .reveal.vis{opacity:1;transform:translateY(0)}
 
 /* ── RESPONSIVE ── */
@@ -440,65 +445,65 @@ footer em{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,0.5)
 
   <div class="writing-grid">
 
-    <div class="writing-card card-featured" data-cat="hrtech">
+    <a href="https://www.adaface.com/blog/why-mbti-test-fails-in-recruitment/" target="_blank" class="writing-card card-featured" data-cat="hrtech">
       <div class="card-category">HR Psychology &nbsp;·&nbsp; Recruitment</div>
       <div class="card-title">Why the Myers-Briggs Test is Totally Meaningless</div>
       <div class="card-excerpt">Two million US adults take the MBTI every year, yet psychologists have repeatedly found it unreliable, with 50% of people getting a different result on a retest. An examination of why this test persists despite the evidence, and what actually works instead.</div>
       <div class="card-footer">
         <span class="card-pub">adaface.com/blog &nbsp;·&nbsp; Nov 2022</span>
-        <a href="https://www.adaface.com/blog/why-mbti-test-fails-in-recruitment/" target="_blank" class="card-arrow">→</a>
+        <span class="card-arrow">→</span>
       </div>
-    </div>
+    </a>
 
-    <div class="writing-card" data-cat="hrtech">
+    <a href="https://www.adaface.com/blog/what-your-candidates-are-thinking/" target="_blank" class="writing-card" data-cat="hrtech">
       <div class="card-category">Talent Acquisition</div>
       <div class="card-title">What Your Candidates Are Thinking (But Won't Tell You)</div>
       <div class="card-excerpt">The unspoken expectations candidates bring to interviews, and how TA teams can close the gap.</div>
       <div class="card-footer">
         <span class="card-pub">adaface.com/blog &nbsp;·&nbsp; Jul 2023</span>
-        <a href="https://www.adaface.com/blog/what-your-candidates-are-thinking/" target="_blank" class="card-arrow">→</a>
+        <span class="card-arrow">→</span>
       </div>
-    </div>
+    </a>
 
-    <div class="writing-card" data-cat="hrtech">
+    <a href="https://www.adaface.com/blog/ai-in-hr/" target="_blank" class="writing-card" data-cat="hrtech">
       <div class="card-category">AI &amp; HR</div>
       <div class="card-title">AI in HR: What It Actually Means for Hiring</div>
       <div class="card-excerpt">A grounded look at how machine learning is reshaping candidate screening, bias, and the recruiter's role.</div>
       <div class="card-footer">
         <span class="card-pub">adaface.com/blog &nbsp;·&nbsp; 2022</span>
-        <a href="https://www.adaface.com/blog/ai-in-hr/" target="_blank" class="card-arrow">→</a>
+        <span class="card-arrow">→</span>
       </div>
-    </div>
+    </a>
 
-    <div class="writing-card" data-cat="hrtech">
+    <a href="https://www.adaface.com/blog/evaluating-application-tracking-systems/" target="_blank" class="writing-card" data-cat="hrtech">
       <div class="card-category">HR Tech &nbsp;·&nbsp; Recruiting Ops</div>
       <div class="card-title">How to Evaluate an Application Tracking System</div>
       <div class="card-excerpt">Choosing an ATS is like evaluating a candidate; you need clear criteria before you start. A guide to building the right selection committee and assessing vendors.</div>
       <div class="card-footer">
         <span class="card-pub">adaface.com/blog &nbsp;·&nbsp; Feb 2023</span>
-        <a href="https://www.adaface.com/blog/evaluating-application-tracking-systems/" target="_blank" class="card-arrow">→</a>
+        <span class="card-arrow">→</span>
       </div>
-    </div>
+    </a>
 
-    <div class="writing-card" data-cat="seo">
+    <a href="http://hrefshare.com/blog/in-house-seo-expert-vs-agency/" target="_blank" class="writing-card" data-cat="seo">
       <div class="card-category">SEO Strategy</div>
       <div class="card-title">In-House SEO Expert vs Agency: What's Right for You?</div>
       <div class="card-excerpt">A practical framework for companies deciding where their SEO investment should live, and what each model actually costs in time, money, and control.</div>
       <div class="card-footer">
         <span class="card-pub">hrefshare.com/blog</span>
-        <a href="http://hrefshare.com/blog/in-house-seo-expert-vs-agency/" target="_blank" class="card-arrow">→</a>
+        <span class="card-arrow">→</span>
       </div>
-    </div>
+    </a>
 
-    <div class="writing-card" data-cat="tech">
+    <a href="https://www.adaface.com/blog/sql-developer-salary/" target="_blank" class="writing-card" data-cat="tech">
       <div class="card-category">Tech Hiring &nbsp;·&nbsp; Data</div>
       <div class="card-title">The Ultimate Guide to a SQL Developer Salary</div>
       <div class="card-excerpt">SQL developer compensation broken down by experience level, geography, and specialisation, with context on what the role demands and how to screen for it.</div>
       <div class="card-footer">
         <span class="card-pub">adaface.com/blog &nbsp;·&nbsp; Aug 2022</span>
-        <a href="https://www.adaface.com/blog/sql-developer-salary/" target="_blank" class="card-arrow">→</a>
+        <span class="card-arrow">→</span>
       </div>
-    </div>
+    </a>
 
   </div>
 </section>
@@ -518,7 +523,7 @@ footer em{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,0.5)
       <div>
         <div class="exp-role">Technical Writer &amp; Operations Analyst</div>
         <ul class="exp-bullets">
-          <li>Authored the full documentation suite for a 63-feature enterprise platform rollout - functional specs, LLD documents, data mapping tabs, JIRA user stories, and release notes.</li>
+          <li>Authored the full documentation suite for a 63-feature enterprise platform rollout, functional specs, LLD documents, data mapping tabs, JIRA user stories, and release notes.</li>
           <li>Created <strong>Quick Reference Guides</strong> for 500+ external suppliers that cut daily support queries from 6 to 1–2 per month.</li>
           <li>Established the LLD data mapping document as the <strong>standard template</strong> adopted across all subsequent platform launches.</li>
           <li>Wrote stakeholder communications, usage reports, and enhancement roadmaps for leadership across APAC, EMEA, and NA.</li>
@@ -534,7 +539,7 @@ footer em{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,0.5)
       <div>
         <div class="exp-role">Marketing Writer &amp; Content Strategist</div>
         <ul class="exp-bullets">
-          <li><strong>Employee #1</strong> at an Entrepreneur First-backed B2B SaaS startup, defined brand voice from scratch.</li>
+          <li><strong>Employee #1</strong> at an Entrepreneur First-backed B2B SaaS startup; defined brand voice from scratch.</li>
           <li>Grew organic traffic <strong>+28% month-over-month</strong> and domain authority by 45% through long-form editorial publishing.</li>
           <li>Managed 2 SEO agencies, 2 websites, and 3 international interns; authored 10+ high-ranking blog articles.</li>
           <li>Wrote 8 product demo scripts that converted 3 enterprise clients; ghostwrote for 300+ individual businesses.</li>
@@ -550,7 +555,7 @@ footer em{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,0.5)
       <div>
         <div class="exp-role">Content Lead</div>
         <ul class="exp-bullets">
-          <li>Wrote all promotional content for website and paid campaigns across Instagram, Google Ads, MSG91, and Zoho.</li>
+          <li>Wrote all promotional content for website and paid campaigns across Instagram, Google Ads, MSG91, and Zoko.</li>
           <li>Doubled product scan KPIs from <strong>50k to 100k within one week</strong> using two Instagram campaigns.</li>
         </ul>
       </div>
@@ -583,10 +588,10 @@ footer em{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,0.5)
       <p style="font-size:0.95rem;color:rgba(255,255,255,0.6);line-height:1.9;max-width:380px">Available for freelance projects, retainer work, and long-term collaborations. I write best when I understand the brand, so let's start with a conversation.</p>
     </div>
     <div class="contact-links">
-      <a href="mailto:sshubhangi.115@gmail.com" class="contact-link">
+      <a href="/cdn-cgi/l/email-protection#c7b4b4afb2a5afa6a9a0aee9f6f6f287a0aaa6aeabe9a4a8aa" class="contact-link">
         <div>
           <div class="contact-type">Email</div>
-          <div class="contact-val">sshubhangi.115@gmail.com</div>
+          <div class="contact-val"><span class="__cf_email__" data-cfemail="2c5f5f44594e444d424b45021d1d196c4b414d4540024f4341">[email&#160;protected]</span></div>
         </div>
         <span class="contact-arrow">→</span>
       </a>
@@ -613,7 +618,7 @@ footer em{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,0.5)
   <p>© 2026 &nbsp;·&nbsp; Open to new work</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const cursor = document.getElementById('cursor');
 document.addEventListener('mousemove', e => {
   cursor.style.left = e.clientX + 'px';
@@ -637,13 +642,4 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    const filter = btn.dataset.filter;
-    document.querySelectorAll('.writing-card').forEach(card => {
-      const match = filter === 'all' || card.dataset.cat === filter;
-      card.style.display = match ? 'flex' : 'none';
-    });
-  });
-});
-</script>
-</body>
-</html>
+    const filter

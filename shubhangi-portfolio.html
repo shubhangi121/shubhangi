@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shubhangi Shreya — Writer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Mono:wght@300;400&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1208;
+  --ink2:#4a3f2f;
+  --ink3:#8a7a66;
+  --paper:#faf8f3;
+  --cream:#f2ede2;
+  --warm:#e8dfc8;
+  --amber:#c8893a;
+  --amber2:#f0b865;
+  --amber-pale:#fdf4e3;
+  --rule:#d8cdb8;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Instrument Sans',sans-serif;
+  --mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+/* ── CURSOR ── */
+body{cursor:none}
+#cursor{
+  position:fixed;width:10px;height:10px;
+  background:var(--amber);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:transform 0.15s ease,width 0.3s,height 0.3s,background 0.3s;
+  mix-blend-mode:multiply;
+}
+#cursor.big{width:40px;height:40px;background:var(--amber2);opacity:0.5}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1.5rem 3rem;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all 0.4s;
+}
+nav.scrolled{
+  background:rgba(250,248,243,0.92);
+  backdrop-filter:blur(12px);
+  padding:1rem 3rem;
+  border-bottom:1px solid var(--rule);
+}
+.nav-logo{
+  font-family:var(--serif);font-style:italic;
+  font-size:1.15rem;color:var(--ink);text-decoration:none;
+  letter-spacing:0.02em;
+}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--ink3);text-decoration:none;transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--amber)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:0 3rem 5rem;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;top:0;right:-10%;width:65%;height:100%;
+  background:var(--cream);clip-path:polygon(15% 0,100% 0,100% 100%,0% 100%);
+  z-index:0;
+}
+.hero-grain{
+  position:absolute;inset:0;z-index:1;opacity:0.04;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size:200px;pointer-events:none;
+}
+.hero-content{position:relative;z-index:2;max-width:800px}
+.hero-eyebrow{
+  font-family:var(--mono);font-size:0.72rem;
+  color:var(--amber);letter-spacing:0.2em;
+  text-transform:uppercase;margin-bottom:1.5rem;
+  opacity:0;animation:rise 0.9s 0.2s forwards;
+}
+.hero-name{
+  font-family:var(--serif);
+  font-size:clamp(4.5rem,9vw,8.5rem);
+  font-weight:400;line-height:0.92;
+  letter-spacing:-0.03em;margin-bottom:1.5rem;
+  opacity:0;animation:rise 0.9s 0.4s forwards;
+}
+.hero-name em{font-style:italic;color:var(--amber)}
+.hero-tagline{
+  font-size:1rem;color:var(--ink2);max-width:480px;
+  line-height:1.8;margin-bottom:2.5rem;
+  opacity:0;animation:rise 0.9s 0.6s forwards;
+}
+.hero-bottom{
+  display:flex;align-items:center;gap:2rem;flex-wrap:wrap;
+  opacity:0;animation:rise 0.9s 0.8s forwards;
+}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:var(--ink);color:var(--paper);
+  padding:0.8rem 1.8rem;font-size:0.8rem;
+  letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;transition:all 0.3s;
+}
+.btn-primary:hover{background:var(--amber)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  color:var(--ink3);font-size:0.8rem;letter-spacing:0.1em;
+  text-transform:uppercase;text-decoration:none;
+  border-bottom:1px solid var(--rule);padding-bottom:2px;
+  transition:all 0.2s;
+}
+.btn-ghost:hover{color:var(--amber);border-color:var(--amber)}
+
+/* ── MARQUEE ── */
+.marquee-wrap{
+  background:var(--ink);color:var(--amber2);
+  padding:0.9rem 0;overflow:hidden;
+  font-family:var(--mono);font-size:0.75rem;letter-spacing:0.12em;
+}
+.marquee-track{
+  display:flex;gap:3rem;width:max-content;
+  animation:marquee 28s linear infinite;
+}
+.marquee-track span{white-space:nowrap}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── SECTIONS ── */
+.section{padding:7rem 3rem;border-bottom:1px solid var(--rule)}
+.section-label{
+  font-family:var(--mono);font-size:0.7rem;color:var(--amber);
+  letter-spacing:0.22em;text-transform:uppercase;margin-bottom:1rem;
+}
+.section-title{
+  font-family:var(--serif);font-size:clamp(2rem,4vw,3.2rem);
+  font-weight:400;line-height:1.1;letter-spacing:-0.01em;
+  margin-bottom:3rem;
+}
+.section-title em{font-style:italic;color:var(--ink3)}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.about-text p{font-size:1.05rem;line-height:1.9;color:var(--ink2);margin-bottom:1.25rem}
+.about-text p strong{color:var(--ink);font-weight:500}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem}
+.stat-box{
+  border:1px solid var(--rule);padding:1.5rem;
+  background:var(--cream);
+}
+.stat-num{
+  font-family:var(--serif);font-size:2.6rem;font-weight:400;
+  color:var(--amber);line-height:1;margin-bottom:0.3rem;
+}
+.stat-label{font-size:0.72rem;letter-spacing:0.12em;color:var(--ink3);text-transform:uppercase}
+.about-sidebar{}
+.sidebar-block{padding:2rem 0;border-bottom:1px solid var(--rule)}
+.sidebar-block:first-child{padding-top:0;border-top:1px solid var(--rule)}
+.sidebar-heading{
+  font-family:var(--mono);font-size:0.68rem;color:var(--amber);
+  letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.75rem;
+}
+.sidebar-text{font-size:0.88rem;color:var(--ink2);line-height:1.7}
+.tag-list{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.5rem}
+.tag{
+  font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;
+  padding:0.25rem 0.7rem;border:1px solid var(--rule);
+  color:var(--ink3);background:var(--paper);
+}
+
+/* ── WRITING GRID ── */
+.writing-filters{
+  display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem;
+}
+.filter-btn{
+  font-family:var(--mono);font-size:0.68rem;letter-spacing:0.12em;
+  text-transform:uppercase;padding:0.4rem 1rem;
+  border:1px solid var(--rule);background:none;
+  color:var(--ink3);cursor:none;transition:all 0.2s;
+}
+.filter-btn.active,.filter-btn:hover{
+  background:var(--ink);color:var(--amber2);border-color:var(--ink);
+}
+.writing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--rule)}
+.writing-card{
+  background:var(--paper);padding:2rem;
+  transition:background 0.25s;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  opacity:0;transform:translateY(16px);
+  transition:opacity 0.6s,transform 0.6s,background 0.25s;
+}
+.writing-card.vis{opacity:1;transform:translateY(0)}
+.writing-card:hover{background:var(--amber-pale)}
+.writing-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--amber);transform:scaleX(0);transform-origin:left;
+  transition:transform 0.3s;
+}
+.writing-card:hover::before{transform:scaleX(1)}
+.card-category{
+  font-family:var(--mono);font-size:0.65rem;color:var(--amber);
+  letter-spacing:0.16em;text-transform:uppercase;margin-bottom:0.75rem;
+}
+.card-title{
+  font-family:var(--serif);font-size:1.25rem;font-weight:400;
+  line-height:1.3;color:var(--ink);margin-bottom:0.75rem;flex:1;
+}
+.card-excerpt{
+  font-size:0.82rem;line-height:1.7;color:var(--ink3);
+  margin-bottom:1.25rem;
+}
+.card-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:auto;padding-top:1rem;border-top:1px solid var(--rule);
+}
+.card-pub{font-family:var(--mono);font-size:0.65rem;color:var(--ink3);letter-spacing:0.08em}
+.card-arrow{
+  color:var(--rule);font-size:1rem;text-decoration:none;
+  transition:color 0.2s,transform 0.2s;display:inline-block;
+}
+.writing-card:hover .card-arrow{color:var(--amber);transform:translateX(4px)}
+.card-featured{
+  grid-column:span 2;
+}
+.card-featured .card-title{font-size:1.7rem}
+
+/* ── EXPERIENCE ── */
+.exp-list{border-top:1px solid var(--rule)}
+.exp-item{
+  display:grid;grid-template-columns:200px 1fr;gap:3rem;
+  padding:2.5rem 0;border-bottom:1px solid var(--rule);
+  opacity:0;transform:translateY(14px);
+  transition:opacity 0.7s,transform 0.7s;
+}
+.exp-item.vis{opacity:1;transform:translateY(0)}
+.exp-meta{}
+.exp-period{font-family:var(--mono);font-size:0.72rem;color:var(--ink3);line-height:1.8}
+.exp-company{font-family:var(--mono);font-size:0.72rem;color:var(--amber);letter-spacing:0.08em;margin-top:0.25rem}
+.exp-role{font-family:var(--serif);font-size:1.35rem;font-weight:400;margin-bottom:0.75rem;color:var(--ink)}
+.exp-bullets{list-style:none}
+.exp-bullets li{
+  font-size:0.88rem;line-height:1.8;color:var(--ink2);
+  padding-left:1.2rem;position:relative;margin-bottom:0.2rem;
+}
+.exp-bullets li::before{content:'—';position:absolute;left:0;color:var(--amber);font-size:0.8rem}
+.exp-bullets li strong{color:var(--ink);font-weight:500}
+
+/* ── CONTACT ── */
+.contact-section{background:var(--ink);color:var(--cream);border-bottom:none}
+.contact-section .section-label{color:var(--amber2)}
+.contact-section .section-title{color:var(--cream)}
+.contact-section .section-title em{color:var(--amber2)}
+.contact-links{display:flex;flex-direction:column;gap:0}
+.contact-link{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.5rem 0;border-bottom:1px solid rgba(255,255,255,0.1);
+  text-decoration:none;color:var(--cream);
+  transition:padding-left 0.25s;
+}
+.contact-link:first-child{border-top:1px solid rgba(255,255,255,0.1)}
+.contact-link:hover{padding-left:0.75rem}
+.contact-type{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--amber2);margin-bottom:0.2rem}
+.contact-val{font-size:0.9rem;color:rgba(255,255,255,0.7)}
+.contact-arrow{color:rgba(255,255,255,0.2);transition:color 0.2s,transform 0.2s;font-size:1.1rem}
+.contact-link:hover .contact-arrow{color:var(--amber2);transform:translateX(4px)}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--ink);color:rgba(255,255,255,0.3);
+  padding:1.5rem 3rem;display:flex;justify-content:space-between;
+  font-family:var(--mono);font-size:0.68rem;letter-spacing:0.08em;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+footer em{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,0.5)}
+
+/* ── ANIMATIONS ── */
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.8s,transform 0.8s}
+.reveal.vis{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:1.25rem 1.5rem}
+  nav.scrolled{padding:0.9rem 1.5rem}
+  .nav-links{display:none}
+  .hero{padding:0 1.5rem 4rem}
+  .section{padding:5rem 1.5rem}
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .about-stats{grid-template-columns:1fr 1fr}
+  .writing-grid{grid-template-columns:1fr}
+  .card-featured{grid-column:span 1}
+  .exp-item{grid-template-columns:1fr;gap:0.5rem}
+  footer{padding:1.5rem;flex-direction:column;gap:0.5rem}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Shubhangi Shreya</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Copywriter &amp; Content Strategist &nbsp;·&nbsp; 5+ Years</p>
+    <h1 class="hero-name">Shubhangi<em>Shreya.</em></h1>
+    <p class="hero-tagline">I write long-form content for brands that want to be remembered — not just found. Simple, succinct, clutter-free. No sales pitch, just ideas worth reading.</p>
+    <div class="hero-bottom">
+      <a href="#writing" class="btn-primary">Read my work &nbsp;↓</a>
+      <a href="#contact" class="btn-ghost">Get in touch &nbsp;→</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Long-form SEO content</span><span>·</span>
+    <span>Brand copywriting</span><span>·</span>
+    <span>Technical documentation</span><span>·</span>
+    <span>Product writing</span><span>·</span>
+    <span>Press releases</span><span>·</span>
+    <span>Ghostwriting</span><span>·</span>
+    <span>UX microcopy</span><span>·</span>
+    <span>Content strategy</span><span>·</span>
+    <span>HR Tech</span><span>·</span>
+    <span>B2B SaaS</span><span>·</span>
+    <span>Supply chain</span><span>·</span>
+    <span>D2C</span><span>·</span>
+    <span>Long-form SEO content</span><span>·</span>
+    <span>Brand copywriting</span><span>·</span>
+    <span>Technical documentation</span><span>·</span>
+    <span>Product writing</span><span>·</span>
+    <span>Press releases</span><span>·</span>
+    <span>Ghostwriting</span><span>·</span>
+    <span>UX microcopy</span><span>·</span>
+    <span>Content strategy</span><span>·</span>
+    <span>HR Tech</span><span>·</span>
+    <span>B2B SaaS</span><span>·</span>
+    <span>Supply chain</span><span>·</span>
+    <span>D2C</span><span>·</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-label reveal">i. About</div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I'm a freelance copywriter with <strong>5+ years of experience</strong> writing across agencies, B2B SaaS, and enterprise platforms. I specialise in the creative and technology sectors — producing content that builds brand awareness authentically, without sounding like a sales pitch.</p>
+      <p>Building brand awareness in this information-overload era is genuinely hard. I practise <strong>authentic marketing strategies</strong> with simple, succinct, clutter-free content that gives readers an experience worth remembering.</p>
+      <p>I've ghostwritten landing pages for 300+ businesses, driven measurable traffic growth through editorial strategy, and written technical documentation adopted as company-wide standards.</p>
+      <div class="about-stats">
+        <div class="stat-box">
+          <div class="stat-num">300<span style="font-size:1.5rem">+</span></div>
+          <div class="stat-label">Businesses written for</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">28<span style="font-size:1.5rem">%</span></div>
+          <div class="stat-label">Traffic growth MoM</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">5<span style="font-size:1.5rem">+</span></div>
+          <div class="stat-label">Years experience</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">45<span style="font-size:1.5rem">%</span></div>
+          <div class="stat-label">Domain authority lift</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-sidebar reveal">
+      <div class="sidebar-block">
+        <div class="sidebar-heading">What I write</div>
+        <div class="tag-list">
+          <span class="tag">Long-form</span>
+          <span class="tag">SEO articles</span>
+          <span class="tag">Ghostwriting</span>
+          <span class="tag">Press releases</span>
+          <span class="tag">Tech docs</span>
+          <span class="tag">UX copy</span>
+          <span class="tag">Email</span>
+          <span class="tag">Brand voice</span>
+        </div>
+      </div>
+      <div class="sidebar-block">
+        <div class="sidebar-heading">Industries</div>
+        <div class="sidebar-text">HR Tech &nbsp;·&nbsp; B2B SaaS &nbsp;·&nbsp; Supply Chain &nbsp;·&nbsp; Fashion &amp; Retail &nbsp;·&nbsp; D2C &amp; E-commerce &nbsp;·&nbsp; Enterprise Software &nbsp;·&nbsp; Academic</div>
+      </div>
+      <div class="sidebar-block">
+        <div class="sidebar-heading">Tools</div>
+        <div class="sidebar-text">Ahrefs &nbsp;·&nbsp; Google Search Console &nbsp;·&nbsp; Google Analytics &nbsp;·&nbsp; Google Ads &nbsp;·&nbsp; Figma &nbsp;·&nbsp; Confluence &nbsp;·&nbsp; JIRA &nbsp;·&nbsp; WebEngage</div>
+      </div>
+      <div class="sidebar-block">
+        <div class="sidebar-heading">Education</div>
+        <div class="sidebar-text">B.F.Tech — NIFT Bangalore &nbsp;·&nbsp; AIR 14, NIFT 2016 &nbsp;·&nbsp; UNESCO Essay Competition — Honorary Mention &nbsp;·&nbsp; Operations Analytics, Wharton Online</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WRITING -->
+<section class="section" id="writing">
+  <div class="section-label reveal">ii. Published work</div>
+  <h2 class="section-title reveal">Words I've<br><em>put out there.</em></h2>
+
+  <div class="writing-filters reveal">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="hrtech">HR Tech</button>
+    <button class="filter-btn" data-filter="seo">SEO & Growth</button>
+    <button class="filter-btn" data-filter="tech">Tech & Data</button>
+  </div>
+
+  <div class="writing-grid">
+
+    <div class="writing-card card-featured" data-cat="hrtech">
+      <div class="card-category">HR Psychology &nbsp;·&nbsp; Recruitment</div>
+      <div class="card-title">Why the Myers-Briggs Test is Totally Meaningless</div>
+      <div class="card-excerpt">Two million US adults take the MBTI every year, yet psychologists have repeatedly found it unreliable — with 50% of people getting a different result on a retest. An examination of why this test persists despite the evidence, and what actually works instead.</div>
+      <div class="card-footer">
+        <span class="card-pub">adaface.com/blog &nbsp;·&nbsp; Nov 2022</span>
+        <a href="https://www.adaface.com/blog/why-mbti-test-fails-in-recruitment/" target="_blank" class="card-arrow">→</a>
+      </div>
+    </div>
+
+    <div class="writing-card" data-cat="hrtech">
+      <div class="card-category">Talent Acquisition</div>
+      <div class="card-title">What Your Candidates Are Thinking (But Won't Tell You)</div>
+      <div class="card-excerpt">The unspoken expectations candidates bring to interviews — and how TA teams can close the gap.</div>
+      <div class="card-footer">
+        <span class="card-pub">adaface.com/blog &nbsp;·&nbsp; Jul 2023</span>
+        <a href="https://www.adaface.com/blog/what-your-candidates-are-thinking/" target="_blank" class="card-arrow">→</a>
+      </div>
+    </div>
+
+    <div class="writing-card" data-cat="hrtech">
+      <div class="card-category">AI &amp; HR</div>
+      <div class="card-title">AI in HR: What It Actually Means for Hiring</div>
+      <div class="card-excerpt">A grounded look at how machine learning is reshaping candidate screening, bias, and the recruiter's role.</div>
+      <div class="card-footer">
+        <span class="card-pub">adaface.com/blog &nbsp;·&nbsp; 2022</span>
+        <a href="https://www.adaface.com/blog/ai-in-hr/" target="_blank" class="card-arrow">→</a>
+      </div>
+    </div>
+
+    <div class="writing-card" data-cat="hrtech">
+      <div class="card-category">HR Tech &nbsp;·&nbsp; Recruiting Ops</div>
+      <div class="card-title">How to Evaluate an Application Tracking System</div>
+      <div class="card-excerpt">Choosing an ATS is like evaluating a candidate — you need clear criteria before you start. A guide to building the right selection committee and assessing vendors.</div>
+      <div class="card-footer">
+        <span class="card-pub">adaface.com/blog &nbsp;·&nbsp; Feb 2023</span>
+        <a href="https://www.adaface.com/blog/evaluating-application-tracking-systems/" target="_blank" class="card-arrow">→</a>
+      </div>
+    </div>
+
+    <div class="writing-card" data-cat="seo">
+      <div class="card-category">SEO Strategy</div>
+      <div class="card-title">In-House SEO Expert vs Agency: What's Right for You?</div>
+      <div class="card-excerpt">A practical framework for companies deciding where their SEO investment should live — and what each model actually costs in time, money, and control.</div>
+      <div class="card-footer">
+        <span class="card-pub">hrefshare.com/blog</span>
+        <a href="http://hrefshare.com/blog/in-house-seo-expert-vs-agency/" target="_blank" class="card-arrow">→</a>
+      </div>
+    </div>
+
+    <div class="writing-card" data-cat="tech">
+      <div class="card-category">Tech Hiring &nbsp;·&nbsp; Data</div>
+      <div class="card-title">The Ultimate Guide to a SQL Developer Salary</div>
+      <div class="card-excerpt">SQL developer compensation broken down by experience level, geography, and specialisation — with context on what the role demands and how to screen for it.</div>
+      <div class="card-footer">
+        <span class="card-pub">adaface.com/blog &nbsp;·&nbsp; Aug 2022</span>
+        <a href="https://www.adaface.com/blog/sql-developer-salary/" target="_blank" class="card-arrow">→</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="section-label reveal">iii. Experience</div>
+  <h2 class="section-title reveal">Where I've<br><em>written.</em></h2>
+
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-period">Sep 2021 – Present</div>
+        <div class="exp-company">Ralph Lauren</div>
+      </div>
+      <div>
+        <div class="exp-role">Technical Writer &amp; Operations Analyst</div>
+        <ul class="exp-bullets">
+          <li>Authored the full documentation suite for a 63-feature enterprise platform rollout — functional specs, LLD documents, data mapping tabs, JIRA user stories, and release notes.</li>
+          <li>Created <strong>Quick Reference Guides</strong> for 500+ external suppliers that cut daily support queries from 6 to 1–2 per month.</li>
+          <li>Established the LLD data mapping document as the <strong>standard template</strong> adopted across all subsequent platform launches.</li>
+          <li>Wrote stakeholder communications, usage reports, and enhancement roadmaps for leadership across APAC, EMEA, and NA.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-period">Mar 2021 – Sep 2021</div>
+        <div class="exp-company">Adaface</div>
+      </div>
+      <div>
+        <div class="exp-role">Marketing Writer &amp; Content Strategist</div>
+        <ul class="exp-bullets">
+          <li><strong>Employee #1</strong> at an Entrepreneur First-backed B2B SaaS startup — defined brand voice from scratch.</li>
+          <li>Grew organic traffic <strong>+28% month-over-month</strong> and domain authority by 45% through long-form editorial publishing.</li>
+          <li>Managed 2 SEO agencies, 2 websites, and 3 international interns; authored 10+ high-ranking blog articles.</li>
+          <li>Wrote 8 product demo scripts that converted 3 enterprise clients; ghostwrote for 300+ individual businesses.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-period">Jan 2021 – Mar 2021</div>
+        <div class="exp-company">Flying Homingos</div>
+      </div>
+      <div>
+        <div class="exp-role">Content Lead</div>
+        <ul class="exp-bullets">
+          <li>Wrote all promotional content for website and paid campaigns across Instagram, Google Ads, MSG91, and Zoko.</li>
+          <li>Doubled product scan KPIs from <strong>50k to 100k within one week</strong> using two Instagram campaigns.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-period">May 2018 – Jan 2021</div>
+        <div class="exp-company">Cedomedia</div>
+      </div>
+      <div>
+        <div class="exp-role">Freelance Content Writer</div>
+        <ul class="exp-bullets">
+          <li>Press releases, landing pages, and long-form blog content for clients in the US and UK.</li>
+          <li>SEO-optimised article production for <strong>300+ individual businesses</strong> across tech, finance, fashion, and lifestyle.</li>
+          <li>Developed thought leadership content and contributed to campaigns via Google Analytics, Google Ads, and WebEngage.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact">
+  <div class="section-label">iv. Contact</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start">
+    <div>
+      <h2 class="section-title">Let's make<br><em>something good.</em></h2>
+      <p style="font-size:0.95rem;color:rgba(255,255,255,0.6);line-height:1.9;max-width:380px">Available for freelance projects, retainer work, and long-term collaborations. I write best when I understand the brand — so let's start with a conversation.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:sshubhangi.115@gmail.com" class="contact-link">
+        <div>
+          <div class="contact-type">Email</div>
+          <div class="contact-val">sshubhangi.115@gmail.com</div>
+        </div>
+        <span class="contact-arrow">→</span>
+      </a>
+      <a href="https://linkedin.com/in/shubhangi-s-94560515a" target="_blank" class="contact-link">
+        <div>
+          <div class="contact-type">LinkedIn</div>
+          <div class="contact-val">linkedin.com/in/shubhangi-s-94560515a</div>
+        </div>
+        <span class="contact-arrow">→</span>
+      </a>
+      <a href="tel:+918969432348" class="contact-link">
+        <div>
+          <div class="contact-type">Phone</div>
+          <div class="contact-val">+91 8969 432 348</div>
+        </div>
+        <span class="contact-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><em>Shubhangi Shreya</em> &nbsp;·&nbsp; Copywriter &amp; Content Strategist</p>
+  <p>© 2026 &nbsp;·&nbsp; Open to new work</p>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a,button').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('big'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
+});
+
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal,.writing-card,.exp-item').forEach(el => io.observe(el));
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.writing-card').forEach(card => {
+      const match = filter === 'all' || card.dataset.cat === filter;
+      card.style.display = match ? 'flex' : 'none';
+    });
+  });
+});
+</script>
+</body>
+</html>
